@@ -1,3 +1,4 @@
+import math
 
 def create_board(board_size=3):
     if board_size > 6:
@@ -20,8 +21,9 @@ def show_board(board):
     horizontal_axis = ["A", "B", "C", "D", "E", "F"]
     # vertical_axis = [1, 2, 3]
 
+    print("⋯" * 30)
     print("Actual state of board")
-    print("🌫" * 25, end="\n\n")
+    print("⋯" * 30, end="\n")
     print(" " * 5, end="")
 
     for letter in range(0, len(board)):
@@ -39,10 +41,21 @@ def show_board(board):
 
         if row_b == len(board) - 1:
             print(" ", ab_botom_string * len(board))
+    print("⋯" * 30, end="\n\n")
 
 def update_board(emblem, vertical_axis, horizontal_axis, play_desk):
     letters = ["A", "B", "C", "D", "E", "F"]
     ver_point = vertical_axis - 1
     hor_point = letters.index(horizontal_axis)
+    if play_desk[ver_point][hor_point] != " ":
+        return print("coordinates are already in use")
     play_desk[ver_point][hor_point] = emblem
     return play_desk
+
+def print_game_over():
+    string = "Game over"
+    print_length = 50
+    space_length = math.ceil(25 - (len(string) / 2))
+    print("∼" * print_length)
+    print(" " * space_length, string.upper(), sep="")
+    print("∼" * print_length)
