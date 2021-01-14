@@ -1,8 +1,11 @@
 import board
+import game_handler
 import input_handler
 import players
 
-game_board = board.create_board(3)
+desk_size = 3
+
+game_board = board.create_board(desk_size)
 players, start_pl_id = players.setup_players()
 
 board.show_board(game_board)
@@ -12,7 +15,19 @@ game_counter = 1    # The number of games played
 round_counter = 1   # The number of round
 move_counter = 0    # The number of moves made by players (together)
 
+
+someone_won = False
 while True:
+    # TODO Horizontal WIN
+
+    # TODO Vertical WIN
+
+    # TODO Diagonal WIN
+
+    # 
+    if someone_won:
+        break
+
     # All places are taken without winner (draw)
     if empty_places == move_counter:
         print("It's draw!")
@@ -42,8 +57,10 @@ while True:
 
         board.show_board(game_board)
 
-    start_pl_id = list(players.keys())[0]
+        if game_handler.check_win(game_board, desk_size, emblem):
+            someone_won = True
+            break
 
-        # board.update_board(emblem, )
+    start_pl_id = list(players.keys())[0]
 
     round_counter += 1
